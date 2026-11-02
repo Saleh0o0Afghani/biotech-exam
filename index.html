@@ -379,7 +379,7 @@ let mistakesOnly = false;
 let selectedMod = 'all';
 
 // Cheatsheet sub-section state
-let subSection = 'all';
+let subSection = 'scientists';
 
 // Flashcards state
 let fcIdx = 0;
@@ -635,116 +635,193 @@ function setSubSection(sec) {
 }
 
 function renderScientistsAndMath() {
-  document.getElementById('cheat-chips').innerHTML = `
-    <button class="chip ${subSection === 'all' ? 'active' : ''}" onclick="setSubSection('all')">All Sections</button>
-    <button class="chip ${subSection === 'scientists' ? 'active' : ''}" onclick="setSubSection('scientists')">🔬 Scientists (${DATA.scientists.length})</button>
-    <button class="chip ${subSection === 'formulas' ? 'active' : ''}" onclick="setSubSection('formulas')">📐 Formulas (${DATA.formulas.length})</button>
-    <button class="chip ${subSection === 'numbers' ? 'active' : ''}" onclick="setSubSection('numbers')">⚡ Golden Numbers (${DATA.numbers.length})</button>
-    <button class="chip ${subSection === 'enzymes' ? 'active' : ''}" onclick="setSubSection('enzymes')">🧬 Enzymes (${DATA.enzymes.length})</button>
+  const chipsContainer = document.getElementById('cheat-chips');
+  chipsContainer.innerHTML = `
+    <button class="chip ${subSection === 'scientists' ? 'active' : ''}" onclick="setSubSection('scientists')">🔬 7 Scientists</button>
+    <button class="chip ${subSection === 'formulas' ? 'active' : ''}" onclick="setSubSection('formulas')">📐 4 Math Shortcuts</button>
+    <button class="chip ${subSection === 'numbers' ? 'active' : ''}" onclick="setSubSection('numbers')">⚡ 10 Golden Numbers</button>
+    <button class="chip ${subSection === 'enzymes' ? 'active' : ''}" onclick="setSubSection('enzymes')">🧬 Top Enzymes</button>
   `;
 
   let html = '';
 
-  // 1. Scientists
-  if (subSection === 'all' || subSection === 'scientists') {
+  // 1. SCIENTISTS (ULTRA-FAST 1-LINE TABLE)
+  if (subSection === 'scientists' || subSection === 'all') {
     html += `
       <div class="module-header" style="margin-top:0;">
-        <div class="module-title">🔬 Chronological Scientists & Nobel Prizes (جدول العلماء والتواريخ ونوبل)</div>
+        <div class="module-title">🔬 7 Scientists & Nobel Prizes (30-Sec Cheat Sheet)</div>
       </div>
       <div class="table-container">
         <table class="clean-table">
           <thead>
-            <tr><th>Year</th><th>Scientist</th><th>Core Discovery</th><th>Doctor's Exam Trap</th></tr>
+            <tr>
+              <th style="width:28%;">Year & Scientist</th>
+              <th style="width:36%;">Discovery</th>
+              <th style="width:36%;">Exam Reflex (The Trick)</th>
+            </tr>
           </thead>
           <tbody>
-    `;
-    DATA.scientists.forEach(s => {
-      html += `
-        <tr>
-          <td><span class="year-tag">${s.year}</span></td>
-          <td><b>${s.scientist}</b></td>
-          <td>
-            <b>${s.discovery}</b>
-            <div style="font-size:11.5px; color:#475569; margin-top:2px;">${s.details}</div>
-            <div style="font-size:11.5px; color:#1e40af; margin-top:2px;" dir="rtl">💡 ${s.ar}</div>
-          </td>
-          <td><span class="trap-tag">${s.examTrap}</span></td>
-        </tr>
-      `;
-    });
-    html += `</tbody></table></div>`;
-  }
-
-  // 2. Formulas
-  if (subSection === 'all' || subSection === 'formulas') {
-    html += `
-      <div class="module-header" style="margin-top:14px;">
-        <div class="module-title">📐 Math Formulas & Exact Calculations (المعادلات والنسب المئوية)</div>
+            <tr>
+              <td><span class="year-tag">1950</span> <b>Erwin Chargaff</b></td>
+              <td><b>%A=%T, %G=%C</b><br>Purines = Pyrimidines = 50%</td>
+              <td><span class="trap-tag">⚠️ dsDNA ONLY!</span><br>Does NOT apply to ssDNA or RNA</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1953</span> <b>Watson & Crick</b></td>
+              <td><b>B-DNA Double Helix</b><br>(Nobel 1962 with Wilkins)</td>
+              <td>Right-handed, antiparallel strands,<br>10 bp/turn (3.4 nm pitch)</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1956</span> <b>Arthur Kornberg</b></td>
+              <td><b>Isolated DNA Pol I</b><br>(Nobel 1959)</td>
+              <td>Synthesizes 5'→3', needs 3'-OH primer, has 3'→5' proofreading</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1972-73</span> <b>Berg, Boyer, Cohen</b></td>
+              <td><b>Recombinant DNA</b><br>(Paul Berg Nobel 1980)</td>
+              <td>Berg: 1st rDNA (SV40+lambda)<br>Boyer & Cohen: 1st cloned plasmid</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1975</span> <b>Köhler & Milstein</b></td>
+              <td><b>Hybridoma (mAbs)</b><br>(Nobel 1984)</td>
+              <td>Fused B-cell + Myeloma using PEG;<br>Only hybridomas survive in HAT</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1977</span> <b>Frederick Sanger</b></td>
+              <td><b>Dideoxy Sequencing</b><br>(Nobel 1980 - 2nd Nobel!)</td>
+              <td><span class="trap-tag">⚠️ ddNTP lacks 3'-OH</span><br>Terminates chain synthesis</td>
+            </tr>
+            <tr>
+              <td><span class="year-tag">1985</span> <b>Kary Mullis</b></td>
+              <td><b>PCR Amplification</b><br>(Nobel 1993)</td>
+              <td>1988: Introduced <i>Taq</i> polymerase<br>(Thermostable, survives 95°C)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     `;
-    DATA.formulas.forEach(f => {
-      html += `
-        <div class="formula-card">
-          <div class="formula-name">${f.title} (${f.topic})</div>
-          <div class="formula-eq">${f.formula}</div>
-          <ul class="note-bullets">
-            ${f.points.map(p => `<li>${p}</li>`).join('')}
-          </ul>
-          <div class="ar-box" dir="rtl" style="margin-bottom:0;">💡 ${f.ar}</div>
+  }
+
+  // 2. MATH SHORTCUTS (4 SOLVED CARDS - ZERO FLUFF)
+  if (subSection === 'formulas') {
+    html += `
+      <div class="module-header" style="margin-top:0;">
+        <div class="module-title">📐 4 Math Shortcuts & Solved Examples</div>
+      </div>
+
+      <!-- Formula 1: Chargaff Math -->
+      <div class="formula-card">
+        <div class="formula-name">1. Chargaff Base Ratio Math (%A = %T, %G = %C)</div>
+        <div class="formula-eq">%A + %T + %G + %C = 100% | %Purines (A+G) = %Pyrimidines (C+T) = 50%</div>
+        <div style="font-size:13px; line-height:1.5;">
+          <b>⚡ Quick Exam Shortcut:</b><br>
+          If question says <b>%G = 30%</b>:<br>
+          1. <b>%C = 30%</b> (because G = C). Total G+C = 60%.<br>
+          2. Remaining for A+T = 100% - 60% = 40%.<br>
+          3. <b>%A = 20%</b> and <b>%T = 20%</b>.<br>
+          <span class="trap-tag">⚠️ Trap:</span> If %A ≠ %T, the genetic material is <b>single-stranded DNA (ssDNA) or RNA</b>!
         </div>
-      `;
-    });
+      </div>
+
+      <!-- Formula 2: PCR Amplification Yield -->
+      <div class="formula-card">
+        <div class="formula-name">2. PCR Yield Exponential Formula (N = N₀ × 2ⁿ)</div>
+        <div class="formula-eq">Total Copies = Starting Copies (N₀) × 2ⁿ (where n = cycle count)</div>
+        <div style="font-size:13px; line-height:1.5;">
+          <b>⚡ Quick Exam Shortcut:</b><br>
+          • 2¹⁰ ≈ 1,000 (10³) | 2²⁰ ≈ 1,000,000 (10⁶) | 2³⁰ ≈ 1,000,000,000 (10⁹)<br>
+          • <b>Slide Example:</b> 100 starting copies after 30 cycles:<br>
+          &nbsp;&nbsp;Copies = 100 × 2³⁰ ≈ 10¹¹ copies ≈ <b>3.73 µg of DNA</b>.<br>
+          <span class="trap-tag">⚠️ Trap:</span> 1 primer produces linear (not exponential) amplification!
+        </div>
+      </div>
+
+      <!-- Formula 3: DNA Helix Measurements -->
+      <div class="formula-card">
+        <div class="formula-name">3. B-DNA Dimensions & Length Math</div>
+        <div class="formula-eq">1 Turn = 10 bp = 3.4 nm (34 Å) | 1 bp distance = 0.34 nm (3.4 Å) | Diameter = 2.0 nm</div>
+        <div style="font-size:13px; line-height:1.5;">
+          <b>⚡ Quick Exam Shortcut:</b><br>
+          • <b>Length of DNA = Number of base pairs × 0.34 nm</b>.<br>
+          • Example: DNA fragment of 100 bp:<br>
+          &nbsp;&nbsp;Length = 100 × 0.34 nm = <b>34 nm (contains 10 complete helical turns)</b>.
+        </div>
+      </div>
+
+      <!-- Formula 4: Carbon Atom Positions -->
+      <div class="formula-card">
+        <div class="formula-name">4. Deoxyribose Carbon Positions (1' to 5')</div>
+        <div class="formula-eq">1' = Base | 2' = H (or OH in RNA) | 3' = OH | 4' = Ring | 5' = Phosphate (PO₄)</div>
+        <div style="font-size:13px; line-height:1.5;">
+          <b>⚡ Quick Exam Shortcut:</b><br>
+          • <b>Carbon 1':</b> Binds nitrogenous base via N-glycosidic bond.<br>
+          • <b>Carbon 3':</b> Free -OH needed to form phosphodiester bond with incoming 5'-phosphate.<br>
+          • <b>Carbon 5':</b> Carries the phosphate group of the nucleotide.<br>
+          <span class="trap-tag">⚠️ Trap:</span> <b>ddNTP lacks oxygen at BOTH 2' and 3' carbons of PENTOSE sugar!</b>
+        </div>
+      </div>
+    `;
   }
 
-  // 3. Golden Numbers
-  if (subSection === 'all' || subSection === 'numbers') {
+  // 3. GOLDEN NUMBERS (CLEAN 10-ROW FLASH LIST)
+  if (subSection === 'numbers') {
     html += `
-      <div class="module-header" style="margin-top:14px;">
-        <div class="module-title">⚡ Golden Numbers, Yields & Temperatures (الأرقام الذهبية والنسب)</div>
+      <div class="module-header" style="margin-top:0;">
+        <div class="module-title">⚡ 10 Golden Numbers Tested in MCQs</div>
       </div>
       <div class="table-container">
         <table class="clean-table">
-          <thead>
-            <tr><th>Value / Number</th><th>Topic</th><th>Exact Exam Fact</th></tr>
-          </thead>
+          <thead><tr><th>Golden Number</th><th>Exam Fact</th></tr></thead>
           <tbody>
+            <tr><td><span class="year-tag">20 min</span></td><td><b>E. coli doubling time</b> (bacteria grow ~70x faster than tumor cells)</td></tr>
+            <tr><td><span class="year-tag">18–24 hr</span></td><td><b>Mammalian cell doubling time</b> (CHO cells, slow and expensive)</td></tr>
+            <tr><td><span class="year-tag">1 to 1000 kbp</span></td><td><b>Plasmid size</b> (0.1% to 10% of bacterial chromosome; ≤30 genes)</td></tr>
+            <tr><td><span class="year-tag">18–25 nt</span></td><td><b>PCR primer ideal length</b> (never 50-100 nt!)</td></tr>
+            <tr><td><span class="year-tag">94–96°C</span></td><td><b>PCR Denaturation</b> (breaks hydrogen bonds between dsDNA strands)</td></tr>
+            <tr><td><span class="year-tag">50–65°C</span></td><td><b>PCR Annealing</b> (primers bind complementary sequences)</td></tr>
+            <tr><td><span class="year-tag">72°C</span></td><td><b>PCR Extension</b> (optimum temperature for <i>Taq</i> DNA polymerase)</td></tr>
+            <tr><td><span class="year-tag">14 aa</span></td><td><b>Somatostatin length</b> (fused to lacZ, cleaved at Met by CNBr)</td></tr>
+            <tr><td><span class="year-tag">-196°C</span></td><td><b>Liquid nitrogen cryopreservation</b> (with DMSO to prevent ice crystals)</td></tr>
+            <tr><td><span class="year-tag">1982</span></td><td><b>Humulin approved</b> (first recombinant drug in human medicine)</td></tr>
+          </tbody>
+        </table>
+      </div>
     `;
-    DATA.numbers.forEach(n => {
-      html += `
-        <tr>
-          <td><span class="year-tag">${n.num}</span></td>
-          <td><b>${n.topic}</b></td>
-          <td>
-            ${n.fact}
-            <div style="font-size:11.5px; color:#1e40af; margin-top:2px;" dir="rtl">💡 ${n.ar}</div>
-          </td>
-        </tr>
-      `;
-    });
-    html += `</tbody></table></div>`;
   }
 
-  // 4. Enzymes & Reagents
-  if (subSection === 'all' || subSection === 'enzymes') {
+  // 4. KEY ENZYMES (ONE-LINER REFLEXES)
+  if (subSection === 'enzymes') {
     html += `
-      <div class="module-header" style="margin-top:14px;">
-        <div class="module-title">🧬 Master Enzymes, Vectors & Reagents Dictionary (الإنزيمات والكواشف)</div>
+      <div class="module-header" style="margin-top:0;">
+        <div class="module-title">🧬 Key Enzymes & Reagents (One-Liner Reflexes)</div>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
-    `;
-    DATA.enzymes.forEach(e => {
-      html += `
         <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:var(--primary); font-size:13.5px;">${e.name}</span>
-            <span class="year-tag">${e.cat}</span>
-          </div>
-          <div style="font-size:12.5px; color:#334155; margin-top:4px;">${e.role}</div>
-          <div class="ar-box" dir="rtl" style="margin-top:4px; margin-bottom:0;">💡 ${e.ar}</div>
+          <b>DNA Polymerase I:</b> Synthesizes 5'→3', proofreads 3'→5', removes RNA primer 5'→3' (Nick translation).
         </div>
-      `;
-    });
-    html += `</div>`;
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>Taq Polymerase:</b> Thermostable enzyme from <i>Thermus aquaticus</i>. Optimum 72°C, survives 95°C.
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>Reverse Transcriptase:</b> Synthesizes complementary DNA (cDNA) from mRNA template (no introns!).
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>EcoRI:</b> Restriction enzyme cutting <code>5'-GAATTC-3'</code> leaving 5' sticky ends. Breaks phosphodiester bonds.
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>DNA Ligase:</b> Seals phosphodiester bonds between adjacent 3'-OH and 5'-phosphate ends.
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>Alkaline Phosphatase:</b> Removes 5' phosphate from linearized vector to prevent self-ligation.
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>PEG (Polyethylene glycol):</b> Chemical fusogen that merges B-cells with Myeloma membranes in hybridoma.
+        </div>
+        <div class="note-card" style="border-radius:6px; border-top:1px solid var(--border);">
+          <b>HAT Medium:</b> Hypoxanthine, Aminopterin, Thymidine. Aminopterin blocks de novo synthesis; only HGPRT+ hybridomas survive!
+        </div>
+      </div>
+    `;
   }
 
   document.getElementById('cheat-items').innerHTML = html;
